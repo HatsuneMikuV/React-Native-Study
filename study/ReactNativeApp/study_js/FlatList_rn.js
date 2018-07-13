@@ -35,27 +35,6 @@ var json = [
 
 export default class App extends Component {
 
-
-
-    // 注意这个方法前面有async关键字
-    async getMoviesFromApiAsync() {
-        // 注意这里的await语句，其所在的函数必须有async关键字声明
-        return fetch('https://facebook.github.io/react-native/movies.json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'key1=value1&key2=value2'
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return responseJson.movies;
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
     render() {
         return (
             <View style={styles.container}>

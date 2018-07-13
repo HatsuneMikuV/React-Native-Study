@@ -8,6 +8,7 @@ import {AppRegistry} from 'react-native';
 
 // import App from './study_js/Init_rn'
 // import App from './study_js/HelloWorld_rn'
+import App from './study_js/SampleAppMovies'
 // import App from './study_js/Props_rn'
 // import App from './study_js/State_rn'
 // import App from './study_js/Styles_rn'
@@ -17,7 +18,7 @@ import {AppRegistry} from 'react-native';
 // import App from './study_js/ScrollView_rn'
 // import App from './study_js/FlatList_rn'
 // import App from './study_js/SectionList_rn'
-import App from './study_js/Fetch_rn'
+// import App from './study_js/Fetch_rn'
 
 /** study */
 
