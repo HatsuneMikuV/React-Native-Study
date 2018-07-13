@@ -38,6 +38,9 @@ export default class App extends Component {
                 this.setState({
                     data: this.state.data.concat(responseData.movies),
                 });
+            })
+            .catch((error) => {
+                console.error(error);
             });
     }
 
