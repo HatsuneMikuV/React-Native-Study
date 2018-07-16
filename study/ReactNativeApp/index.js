@@ -20,7 +20,8 @@ import {AppRegistry} from 'react-native';
 // import App from './study_js/SectionList_rn'
 // import App from './study_js/Fetch_rn'
 // import App from './study_js/Navigation_rn'
-import App from './study_js/Color_rn'
+// import App from './study_js/Color_rn'
+import App from './study_js/Press_animation_rn'
 
 /** study */
 
