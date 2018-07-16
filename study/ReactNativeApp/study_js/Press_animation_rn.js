@@ -26,10 +26,15 @@ export default class App extends Component {
         h: 100,
     };
 
-    _onPress = () => {
+    _onPressBig = () => {
         // Animate the update
         LayoutAnimation.spring();
         this.setState({w: this.state.w + 15, h: this.state.h + 15})
+    }
+    _onPressSmall = () => {
+        // Animate the update
+        LayoutAnimation.spring();
+        this.setState({w: this.state.w - 15, h: this.state.h - 15})
     }
 
     render() {
@@ -43,9 +48,14 @@ export default class App extends Component {
                 </FadeInView>
                 <View style={styles.container}>
                     <View style={[styles.box, {width: this.state.w, height: this.state.h}]} />
-                    <TouchableOpacity onPress={this._onPress}>
+                    <TouchableOpacity onPress={this._onPressBig}>
                         <View style={styles.button}>
-                            <Text style={styles.buttonText}>Press me!</Text>
+                            <Text style={styles.buttonText}>Press me big!big!big!</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this._onPressSmall}>
+                        <View style={styles.button}>
+                            <Text style={styles.buttonText}>Press me small!small!small!</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
