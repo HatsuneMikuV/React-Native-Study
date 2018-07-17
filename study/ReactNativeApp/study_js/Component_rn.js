@@ -8,9 +8,12 @@
 
 import React, {Component} from 'react';
 import {
-    // ActivityIndicator,
+    ActivityIndicator,
     AccessibilityInfo,
+    Button,
+    ScrollView,
     View,
+    DatePickerIOS,
     Text
 } from 'react-native';
 
@@ -19,6 +22,7 @@ import {
 export default class App extends Component {
     state = {
         screenReaderEnabled: false,
+        date: new Date()
     }
 
     componentDidMount() {
@@ -46,12 +50,39 @@ export default class App extends Component {
         });
     }
 
+    onPressLearnMore = () => {
+
+    }
+    onDateChangeChose = (date) => {
+        this.setState({
+            date: date,
+        });
+    }
+
     render() {
         return (
             <View style={{marginTop:44}}>
-                <Text>
-                    The screen reader is {this.state.screenReaderEnabled ? 'enabled' : 'disabled'}.
-                </Text>
+                <ScrollView >
+                    <Text style={{height:20, color:'#ff1e0c'}}>
+                        The screen reader is {this.state.screenReaderEnabled ? 'enabled' : 'disabled'}.
+                    </Text>
+                    <ActivityIndicator style={{marginTop:10}}/>
+                    <Button style={{marginLeft:20, height:25, width:60, backgroundColor:'#4dceff'}}
+                            onPress={this.onPressLearnMore}
+                            title="Learn More"
+                            color='#841584'
+                    />
+                    <Text style={{height:20, color:'#21bb45'}}>
+                        The Date is {this.state.date.toDateString()}.
+                    </Text>
+                    <DatePickerIOS
+                        date={this.state.date}
+                        maximumDate={new Date()}
+                        minimumDate={new Date(1990, 1, 1)}
+                        mode={'date'}
+                        onDateChange={this.onDateChangeChose}
+                    />
+                </ScrollView>
             </View>
         );
     }
