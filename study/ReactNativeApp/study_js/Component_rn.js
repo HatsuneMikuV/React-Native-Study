@@ -15,6 +15,8 @@ import {
     View,
     DatePickerIOS,
     MaskedViewIOS,
+    Modal,
+    TouchableHighlight,
     Text
 } from 'react-native';
 
@@ -23,7 +25,12 @@ import {
 export default class App extends Component {
     state = {
         screenReaderEnabled: false,
-        date: new Date()
+        date: new Date(),
+        modalVisible: false,
+    }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
     }
 
     componentDidMount() {
@@ -105,6 +112,34 @@ export default class App extends Component {
                     >
                         <View style={{ flex: 1, backgroundColor: 'blue' }} />
                     </MaskedViewIOS>
+
+                    {/*Modal*/}
+                    <Modal
+                        animationType={"slide"}
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {alert("Modal has been closed.")}}
+                    >
+                        <View style={{marginTop: 22}}>
+                            <View>
+                                <Text>Hello World!</Text>
+
+                                <TouchableHighlight onPress={() => {
+                                    this.setModalVisible(!this.state.modalVisible)
+                                }}>
+                                    <Text>Hide Modal</Text>
+                                </TouchableHighlight>
+
+                            </View>
+                        </View>
+                    </Modal>
+                    <TouchableHighlight onPress={() => {
+                        this.setModalVisible(true)
+                    }}>
+                        <Text>Show Modal</Text>
+                    </TouchableHighlight>
+
+
                 </ScrollView>
             </View>
         );
