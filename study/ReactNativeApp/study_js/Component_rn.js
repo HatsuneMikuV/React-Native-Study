@@ -23,6 +23,7 @@ import {
     ListView,
     SegmentedControlIOS,
     Slider,
+    Switch,
     Text
 } from 'react-native';
 
@@ -43,6 +44,7 @@ export default class App extends Component {
         dataSource:ds.cloneWithRows(['row 1', 'row 2']),
         selectedIndex:"test1",
         valueChangeSlider:0,
+        valueSwitch:true,
     }
 
     setModalVisible(visible) {
@@ -237,9 +239,33 @@ export default class App extends Component {
                         value={this.state.valueChangeSlider * 0.1}
                     />
 
+                    {/*Switch*/}
+                    <View style={{flexDirection:'row', marginTop:10}}>
+                        <Switch
+                            value={this.state.valueSwitch}
+                            onValueChange={(value) => this.setState({valueSwitch: value})}
+                        />
+                        <Switch
+                            value={this.state.valueSwitch}
+                            onValueChange={(value) => this.setState({valueSwitch: value})}
+                        />
+                    </View>
+
+
+
                 </ScrollView>
             </View>
         );
     }
 }
 
+class MyScene extends Component {
+
+    render() {
+        return (
+            <View>
+                <Text>Current Scene</Text>
+            </View>
+        )
+    }
+}
