@@ -24,6 +24,7 @@ import {
     SegmentedControlIOS,
     Slider,
     Switch,
+    Image,
     Text
 } from 'react-native';
 
@@ -45,6 +46,7 @@ export default class App extends Component {
         selectedIndex:"test1",
         valueChangeSlider:0,
         valueSwitch:true,
+        imageSize:44,
     }
 
     setModalVisible(visible) {
@@ -103,6 +105,12 @@ export default class App extends Component {
     _onChangeSegment = (value) => {
         this.setState({
             selectedIndex:value,
+        });
+    }
+
+    _onPressButton = () => {
+        this.setState({
+            imageSize:this.state.imageSize += 10,
         });
     }
 
@@ -251,7 +259,10 @@ export default class App extends Component {
                         />
                     </View>
 
-                    {/**/}
+                    {/*TouchableHighlight*/}
+                    <TouchableHighlight onPress={this._onPressButton} underlayColor={'#ffffff'}>
+                        <Image source={{uri: 'home_icon'}} style={{width: this.state.imageSize, height: this.state.imageSize}} />
+                    </TouchableHighlight>
 
 
                 </ScrollView>
