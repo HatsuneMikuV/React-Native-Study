@@ -26,6 +26,7 @@ import {
     Switch,
     Image,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     Text
 } from 'react-native';
 
@@ -270,7 +271,10 @@ export default class App extends Component {
                         <Image source={{uri: 'home_icon'}} style={{width: this.state.imageSize, height: this.state.imageSize}} />
                     </TouchableOpacity>
 
-
+                    {/*TouchableWithoutFeedback*/}
+                    <TouchableWithoutFeedback onPress={this._onPressButton}>
+                        <Image source={{uri: 'home_icon'}} style={{width: this.state.imageSize, height: this.state.imageSize}} />
+                    </TouchableWithoutFeedback>
                 </ScrollView>
             </View>
         );
