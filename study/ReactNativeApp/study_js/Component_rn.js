@@ -14,6 +14,7 @@ import {
     ScrollView,
     View,
     DatePickerIOS,
+    MaskedViewIOS,
     Text
 } from 'react-native';
 
@@ -62,16 +63,24 @@ export default class App extends Component {
     render() {
         return (
             <View style={{marginTop:44}}>
-                <ScrollView >
+                <ScrollView style={{height:1000}}>
+
+                    {/*AccessibilityInfo*/}
                     <Text style={{height:20, color:'#ff1e0c'}}>
                         The screen reader is {this.state.screenReaderEnabled ? 'enabled' : 'disabled'}.
                     </Text>
+
+                    {/*ActivityIndicator*/}
                     <ActivityIndicator style={{marginTop:10}}/>
+
+                    {/*Button*/}
                     <Button style={{marginLeft:20, height:25, width:60, backgroundColor:'#4dceff'}}
                             onPress={this.onPressLearnMore}
                             title="Learn More"
                             color='#841584'
                     />
+
+                    {/*DatePickerIOS*/}
                     <Text style={{height:20, color:'#21bb45'}}>
                         The Date is {this.state.date.toDateString()}.
                     </Text>
@@ -82,6 +91,20 @@ export default class App extends Component {
                         mode={'date'}
                         onDateChange={this.onDateChangeChose}
                     />
+
+                    {/*MaskedViewIOS*/}
+                    <MaskedViewIOS
+                        style={{ height:60, width:300}}
+                        maskElement={
+                            <View style={{flex:1}}>
+                                <Text style={{flex:1, color:'#000000'}}>
+                                    Basic Mask
+                                </Text>
+                            </View>
+                        }
+                    >
+                        <View style={{ flex: 1, backgroundColor: 'blue' }} />
+                    </MaskedViewIOS>
                 </ScrollView>
             </View>
         );
