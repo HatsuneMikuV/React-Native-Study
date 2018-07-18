@@ -21,6 +21,7 @@ import {
     ProgressViewIOS,
     RefreshControl,
     ListView,
+    SegmentedControlIOS,
     Text
 } from 'react-native';
 
@@ -39,6 +40,7 @@ export default class App extends Component {
         language:'Java',
         refreshing:false,
         dataSource:ds.cloneWithRows(['row 1', 'row 2']),
+        selectedIndex:"test1",
     }
 
     setModalVisible(visible) {
@@ -94,12 +96,16 @@ export default class App extends Component {
         },2000)
     }
 
+    _onChangeSegment = (value) => {
+        this.setState({
+            selectedIndex:value,
+        });
+    }
+
     render() {
         return (
             <View style={{marginTop:44}}>
-                <ScrollView contentContainerStyle={{height:1000}}
-
-                            {/*RefreshControl*/}
+                <ScrollView contentContainerStyle={{height:3000}}
                             refreshControl={
                                 <RefreshControl
                                     refreshing={this.state.refreshing}
@@ -198,9 +204,22 @@ export default class App extends Component {
 
                     {/*RefreshControl*/}
                     {/*为了防止手势冲突问题，将其添加在最上面的ScrollView上了*/}
-                    <ListView style={{marginTop:30}}
-                        dataSource={this.state.dataSource}
-                        renderRow={(rowData) => <Text>{rowData}</Text>}
+                    <View style={{marginTop:30, height:100}}>
+                        <ListView style={{flex:1}}
+                                  dataSource={this.state.dataSource}
+                                  renderRow={(rowData) => <Text style={{backgroundColor:'#8bff95'}}>{rowData}</Text>}
+                        />
+                    </View>
+
+                    {/*SegmentedControlIOS*/}
+                    <Text style={{height:20, color:'#21bb45'}}>
+                        The selectedIndex is {this.state.selectedIndex}.
+                    </Text>
+                    <SegmentedControlIOS style={{marginLeft:50, marginRight:50}}
+                        values={["test1", "test2", "test3"]}
+                        selectedIndex={0}
+                        tintColor={'#ff1722'}
+                        onValueChange={this._onChangeSegment}
                     />
 
                 </ScrollView>
