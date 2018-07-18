@@ -251,21 +251,11 @@ export default class App extends Component {
                         />
                     </View>
 
+                    {/**/}
 
 
                 </ScrollView>
             </View>
         );
-    }
-}
-
-class MyScene extends Component {
-
-    render() {
-        return (
-            <View>
-                <Text>Current Scene</Text>
-            </View>
-        )
     }
 }
