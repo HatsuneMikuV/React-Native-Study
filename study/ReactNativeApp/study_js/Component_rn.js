@@ -27,6 +27,8 @@ import {
     Image,
     TouchableOpacity,
     TouchableWithoutFeedback,
+    WebView,
+    ActionSheetIOS,
     Text
 } from 'react-native';
 
@@ -34,6 +36,15 @@ import {
 var list = ["1111", "2222", "3333", "4444", "5555"];
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+var BUTTONS = [
+    'Option 0',
+    'Option 1',
+    'Option 2',
+    'Delete',
+    'Cancel',
+];
+var DESTRUCTIVE_INDEX = 3;
+var CANCEL_INDEX = 4;
 
 export default class App extends Component {
 
@@ -49,13 +60,14 @@ export default class App extends Component {
         valueChangeSlider:0,
         valueSwitch:true,
         imageSize:44,
-    }
+        clicked:'none',
+    };
 
     setModalVisible(visible) {
         this.setState({
             modalVisible: visible,
         });
-    }
+    };
 
     componentDidMount() {
         AccessibilityInfo.addEventListener(
@@ -67,30 +79,30 @@ export default class App extends Component {
                 screenReaderEnabled: isEnabled,
             });
         });
-    }
+    };
 
     componentWillUnmount() {
         AccessibilityInfo.removeEventListener(
             'change',
             this._handleScreenReaderToggled
         );
-    }
+    };
 
     _handleScreenReaderToggled = (isEnabled) => {
         this.setState({
             screenReaderEnabled: isEnabled,
         });
-    }
+    };
 
     onPressLearnMore = () => {
 
-    }
+    };
 
     onDateChangeChose = (date) => {
         this.setState({
             date: date,
         });
-    }
+    };
 
     _onRefresh = () => {
         this.setState({
@@ -102,24 +114,38 @@ export default class App extends Component {
                 dataSource:ds.cloneWithRows(list),
             });
         },2000)
-    }
+    };
 
     _onChangeSegment = (value) => {
         this.setState({
             selectedIndex:value,
         });
-    }
+    };
 
     _onPressButton = () => {
         this.setState({
             imageSize:this.state.imageSize += 10,
         });
-    }
+    };
+
+    showActionSheet = () => {
+        {/*ActionSheetIOS*/}
+        ActionSheetIOS.showActionSheetWithOptions({
+                options: BUTTONS,
+                cancelButtonIndex: CANCEL_INDEX,
+                destructiveButtonIndex: DESTRUCTIVE_INDEX,
+            },
+            (buttonIndex) => {
+                this.setState({
+                    clicked: BUTTONS[buttonIndex],
+                });
+            });
+    };
 
     render() {
         return (
             <View style={{marginTop:44}}>
-                <ScrollView contentContainerStyle={{height:3000}}
+                <ScrollView contentContainerStyle={{height:2000}}
                             refreshControl={
                                 <RefreshControl
                                     refreshing={this.state.refreshing}
@@ -275,8 +301,29 @@ export default class App extends Component {
                     <TouchableWithoutFeedback onPress={this._onPressButton}>
                         <Image source={{uri: 'home_icon'}} style={{width: this.state.imageSize, height: this.state.imageSize}} />
                     </TouchableWithoutFeedback>
+
+                    {/*WebView*/}
+                    <View style={{marginTop:30, marginLeft:20, marginRight:20, height:300}}>
+                        <WebView style={{flex: 1}}
+                                 source={{uri:'http://www.baidu.com'}}
+                                 /*injectedJavaScript ={"alert('测试一下injectedJavaScript属性')"}*/
+                        />
+                    </View>
+
+                    {/*ActionSheetIOS*/}
+                    <View style={{marginTop:20}}>
+                        <Text onPress={this.showActionSheet} style={{marginBottom: 10,
+                            fontWeight: '500'}}>
+                            Click to show the ActionSheet
+                        </Text>
+                        <Text>
+                            Clicked button: {this.state.clicked}
+                        </Text>
+                    </View>
+
                 </ScrollView>
             </View>
         );
     }
+
 }

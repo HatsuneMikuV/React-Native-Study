@@ -25,7 +25,32 @@ import {AppRegistry} from 'react-native';
 // import App from './study_js/Calendar_ios_rn'
 // import App from './study_js/TabBarIOS_rn'
 
-import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+
+import  App from  './study_js/ActionSheetIOS_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Component_rn'
+
+
 
 /** study */
 
