@@ -25,6 +25,7 @@ import {
     Slider,
     Switch,
     Image,
+    TouchableOpacity,
     Text
 } from 'react-native';
 
@@ -263,6 +264,11 @@ export default class App extends Component {
                     <TouchableHighlight onPress={this._onPressButton} underlayColor={'#ffffff'}>
                         <Image source={{uri: 'home_icon'}} style={{width: this.state.imageSize, height: this.state.imageSize}} />
                     </TouchableHighlight>
+
+                    {/*TouchableOpacity*/}
+                    <TouchableOpacity onPress={this._onPressButton} activeOpacity={0.8}>
+                        <Image source={{uri: 'home_icon'}} style={{width: this.state.imageSize, height: this.state.imageSize}} />
+                    </TouchableOpacity>
 
 
                 </ScrollView>
