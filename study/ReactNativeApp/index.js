@@ -28,9 +28,9 @@ import {AppRegistry} from 'react-native';
 // import  App from  './study_js/Component_rn'
 
 // import  App from  './study_js/ActionSheetIOS_rn'
-import  App from  './study_js/AlertIOS_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/AlertIOS_rn'
+// import  App from  './study_js/AppState_rn'
+import  App from  './study_js/CameraRoll_rn'
 // import  App from  './study_js/Component_rn'
 // import  App from  './study_js/Component_rn'
 // import  App from  './study_js/Component_rn'

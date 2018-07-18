@@ -12,7 +12,7 @@ import {
     View,
     Text,
     TouchableHighlight,
-    AlertIOS,
+    AlertIOS
 } from 'react-native';
 
 var buttons = [{

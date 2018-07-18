@@ -15,7 +15,7 @@ import {
     LayoutAnimation,
     TouchableOpacity,
     StyleSheet,
-    Text
+    Text, PanResponder
 } from 'react-native';
 
 
@@ -59,6 +59,11 @@ export default class App extends Component {
                 <FadeInView style={{marginTop:44, width: 250, height: 60, backgroundColor: 'powderblue'}}>
                     <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
                 </FadeInView>
+
+                <DraggableView style={{marginTop:30, height:100, width:100}}>
+                    <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+                </DraggableView>
+
                 <View style={styles.container}>
                     <View style={[styles.box, {width: this.state.w, height: this.state.h}]} />
                     <TouchableOpacity onPress={this._onPressBig}>
@@ -78,6 +83,37 @@ export default class App extends Component {
 
 }
 
+
+class DraggableView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pan: new Animated.ValueXY(), // inits to zero
+        };
+        this.state.panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderMove: Animated.event([null, {
+                dx: this.state.pan.x, // x,y are Animated.Value
+                dy: this.state.pan.y,
+            }]),
+            onPanResponderRelease: () => {
+                Animated.spring(
+                    this.state.pan,         // Auto-multiplexed
+                    {toValue: {x: 0, y: 0}} // Back to zero
+                ).start();
+            },
+        });
+    }
+    render() {
+        return (
+            <Animated.View
+                {...this.state.panResponder.panHandlers}
+                style={this.state.pan.getLayout()}>
+                {this.props.children}
+            </Animated.View>
+        );
+    }
+}
 
 class FadeInView extends Component {
     constructor(props) {
