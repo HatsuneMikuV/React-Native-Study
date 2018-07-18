@@ -18,21 +18,33 @@ import {
     Modal,
     TouchableHighlight,
     Picker,
+    ProgressViewIOS,
+    RefreshControl,
+    ListView,
     Text
 } from 'react-native';
 
 
+var list = ["1111", "2222", "3333", "4444", "5555"];
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
 
 export default class App extends Component {
+
+
     state = {
         screenReaderEnabled: false,
         date: new Date(),
         modalVisible: false,
-        language:'Java'
+        language:'Java',
+        refreshing:false,
+        dataSource:ds.cloneWithRows(['row 1', 'row 2']),
     }
 
     setModalVisible(visible) {
-        this.setState({modalVisible: visible});
+        this.setState({
+            modalVisible: visible,
+        });
     }
 
     componentDidMount() {
@@ -42,7 +54,7 @@ export default class App extends Component {
         );
         AccessibilityInfo.fetch().done((isEnabled) => {
             this.setState({
-                screenReaderEnabled: isEnabled
+                screenReaderEnabled: isEnabled,
             });
         });
     }
@@ -70,10 +82,31 @@ export default class App extends Component {
         });
     }
 
+    _onRefresh = () => {
+        this.setState({
+            refreshing: true,
+        });
+        setTimeout(()=>{
+            this.setState({
+                refreshing: false,
+                dataSource:ds.cloneWithRows(list),
+            });
+        },2000)
+    }
+
     render() {
         return (
             <View style={{marginTop:44}}>
-                <ScrollView style={{height:1000}}>
+                <ScrollView contentContainerStyle={{height:1000}}
+
+                            {/*RefreshControl*/}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={this._onRefresh}
+                                    title={"下拉刷新"}
+                                />
+                            }>
 
                     {/*AccessibilityInfo*/}
                     <Text style={{height:20, color:'#ff1e0c'}}>
@@ -130,7 +163,7 @@ export default class App extends Component {
                                 <TouchableHighlight onPress={() => {
                                     this.setModalVisible(!this.state.modalVisible)
                                 }}>
-                                    <Text>Hide Modal</Text>
+                                    <Text style={{backgroundColor:'#76fffa'}}>Hide Modal</Text>
                                 </TouchableHighlight>
 
                             </View>
@@ -139,7 +172,7 @@ export default class App extends Component {
                     <TouchableHighlight onPress={() => {
                         this.setModalVisible(true)
                     }}>
-                        <Text>Show Modal</Text>
+                        <Text style={{backgroundColor:'#76fffa'}}>Show Modal</Text>
                     </TouchableHighlight>
 
                     {/*Picker*/}
@@ -150,6 +183,25 @@ export default class App extends Component {
                         <Picker.Item label="JavaScript" value="js" />
                         <Picker.Item label="Object-C" value="oc" />
                     </Picker>
+
+                    {/*ProgressViewIOS*/}
+                    <ProgressViewIOS style={{marginTop:10}}
+                        progress={0.35}
+                        progressTintColor={'#ff13c9'}
+                        trackTintColor={'#55ff5a'}
+                    />
+                    <ProgressViewIOS style={{marginTop:10}}
+                        progress={0.7}
+                        progressTintColor={'#ff1722'}
+                        trackTintColor={'#4dceff'}
+                    />
+
+                    {/*RefreshControl*/}
+                    {/*为了防止手势冲突问题，将其添加在最上面的ScrollView上了*/}
+                    <ListView style={{marginTop:30}}
+                        dataSource={this.state.dataSource}
+                        renderRow={(rowData) => <Text>{rowData}</Text>}
+                    />
 
                 </ScrollView>
             </View>
