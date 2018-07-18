@@ -17,6 +17,7 @@ import {
     MaskedViewIOS,
     Modal,
     TouchableHighlight,
+    Picker,
     Text
 } from 'react-native';
 
@@ -27,6 +28,7 @@ export default class App extends Component {
         screenReaderEnabled: false,
         date: new Date(),
         modalVisible: false,
+        language:'Java'
     }
 
     setModalVisible(visible) {
@@ -61,6 +63,7 @@ export default class App extends Component {
     onPressLearnMore = () => {
 
     }
+
     onDateChangeChose = (date) => {
         this.setState({
             date: date,
@@ -139,6 +142,14 @@ export default class App extends Component {
                         <Text>Show Modal</Text>
                     </TouchableHighlight>
 
+                    {/*Picker*/}
+                    <Picker
+                        selectedValue={this.state.language}
+                        onValueChange={(lang) => this.setState({language: lang})}>
+                        <Picker.Item label="Java" value="java" />
+                        <Picker.Item label="JavaScript" value="js" />
+                        <Picker.Item label="Object-C" value="oc" />
+                    </Picker>
 
                 </ScrollView>
             </View>
