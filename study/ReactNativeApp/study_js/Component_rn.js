@@ -22,6 +22,7 @@ import {
     RefreshControl,
     ListView,
     SegmentedControlIOS,
+    Slider,
     Text
 } from 'react-native';
 
@@ -41,6 +42,7 @@ export default class App extends Component {
         refreshing:false,
         dataSource:ds.cloneWithRows(['row 1', 'row 2']),
         selectedIndex:"test1",
+        valueChangeSlider:0,
     }
 
     setModalVisible(visible) {
@@ -220,6 +222,19 @@ export default class App extends Component {
                         selectedIndex={0}
                         tintColor={'#ff1722'}
                         onValueChange={this._onChangeSegment}
+                    />
+
+                    {/*Slider*/}
+                    <Slider style={{marginTop:20, marginLeft:50, marginRight:50}}
+                        value={30}
+                        maximumValue={100}
+                        minimumValue={0}
+                        onValueChange={(value) => this.setState({valueChangeSlider: value})}
+                    />
+                    <Slider style={{marginTop:10, marginLeft:50, marginRight:50}}
+                        disabled={true}
+                        maximumValue={10}
+                        value={this.state.valueChangeSlider * 0.1}
                     />
 
                 </ScrollView>
