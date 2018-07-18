@@ -40,13 +40,12 @@ export default class App extends Component {
     {
         return (
             <TabBarIOS
-                unselectedTintColor="yellow"
                 barTintColor="darkslateblue">
                 <TabBarIOS.Item
                     title="Blue Tab"
-                    renderAsOriginal={true} // 如果为false，只会显示纯色图片
-                    icon={{uri:'home_icon', size:{height:40, width:40}}}
+                    icon={{uri:'home_icon', scale:3}}
                     selected={this.state.selectedTab === 'blueTab'}
+                    renderAsOriginal={true}
                     onPress={() => {
                         this.setState({
                             selectedTab: 'blueTab',
@@ -55,7 +54,9 @@ export default class App extends Component {
                     {this._renderContent('#414A8C', 'Blue Tab')}
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
-                    systemIcon="history"
+                    icon={{uri:'home_icon', scale:3}}
+                    title="Red Tab"
+                    renderAsOriginal={true}
                     badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
                     selected={this.state.selectedTab === 'redTab'}
                     onPress={() => {
@@ -67,10 +68,9 @@ export default class App extends Component {
                     {this._renderContent('#783E33', 'Red Tab', this.state.notifCount)}
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
-                    icon={{uri: 'home_icon', size:{width: 40, height: 40}}}
-                    selectedIcon={{uri: 'home_icon', size:{width: 40, height: 40}}}
-                    renderAsOriginal
-                    title="More"
+                    icon={{uri:'home_icon', scale:3}}
+                    title="Green Tab"
+                    renderAsOriginal={true}
                     selected={this.state.selectedTab === 'greenTab'}
                     onPress={() => {
                         this.setState({
