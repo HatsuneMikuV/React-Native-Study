@@ -14,6 +14,8 @@ import {
     Text,
     InteractionManager,
     TouchableWithoutFeedback,
+    Linking,
+    Button
 } from 'react-native';
 
 
@@ -26,6 +28,14 @@ export default class App extends Component {
         text:'none',
     };
 
+    componentDidMount() {
+        Linking.addEventListener('url', this.handleOpenURL);
+    };
+
+    handleOpenURL = (event) => {
+        console.log(event.url);
+    };
+
     componentWillMount () {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
@@ -34,6 +44,7 @@ export default class App extends Component {
     componentWillUnmount () {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
+        Linking.removeEventListener('url', this._handleOpenURL);
     }
 
     keyboardDidShow = () => {
@@ -64,6 +75,17 @@ export default class App extends Component {
         Keyboard.dismiss();
     };
 
+    openUrl = () => {
+        var url = 'http://www.baidu.com';
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                console.log('Can\'t handle url: ' + url);
+            } else {
+                return Linking.openURL(url);
+            }
+        }).catch(err => console.error('An error occurred', err));
+    };
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={this.pressClick}>
@@ -81,6 +103,12 @@ export default class App extends Component {
                         style={{backgroundColor:'#8bff95'}}
                     />
                     <Text>InteractionManager {this.state.text}</Text>
+
+                    <Button style={{width:80, height:30, backgroundColor:'#55ff5a'}}
+                            title="百度一下"
+                            onPress={this.openUrl}
+                    >
+                    </Button>
                 </View>
             </TouchableWithoutFeedback>
         );
