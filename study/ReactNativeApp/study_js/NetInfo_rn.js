@@ -22,6 +22,7 @@ export default class App extends Component {
         connectionInfoHistory:[],
         connectionInfo: null,
         isConnected: null,
+        isConnectionExpensive:null,
     };
 
     componentDidMount() {
@@ -75,6 +76,16 @@ export default class App extends Component {
         });
     };
 
+    checkIfExpensive = () => {
+        NetInfo.isConnectionExpensive().then(
+            isConnectionExpensive => {
+                this.setState({
+                    isConnectionExpensive:isConnectionExpensive,
+                });
+            }
+        );
+    };
+
     render() {
         return (
             <View style={{marginTop:44}}>
@@ -87,6 +98,15 @@ export default class App extends Component {
                 <View>
                     <Text>{this.state.isConnected ? 'Online' : 'Offline'}</Text>
                 </View>
+                <TouchableWithoutFeedback onPress={this.checkIfExpensive}>
+                    <View>
+                        <Text>Click to see if connection is expensive:
+                            {this.state.isConnectionExpensive === true ? 'Expensive' :
+                                this.state.isConnectionExpensive === false ? 'Not expensive'
+                                    : 'Unknown'}
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
         );
     }
