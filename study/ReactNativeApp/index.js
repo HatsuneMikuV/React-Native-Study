@@ -38,17 +38,8 @@ import {AppRegistry} from 'react-native';
 // import  App from  './study_js/PanResponder_rn'
 // import  App from  './study_js/PushNotificationIOS_rn'
 // import  App from  './study_js/WebView_rn'
-import  App from  './study_js/Share_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
-// import  App from  './study_js/Component_rn'
+// import  App from  './study_js/Share_rn'
+import  App from  './study_js/Vibration_rn'
 
 
 
