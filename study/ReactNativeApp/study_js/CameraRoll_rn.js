@@ -13,7 +13,8 @@ import {
     View,
     Text,
     Button,
-    ScrollView,
+    ImagePickerIOS,
+    ImageStore,
     FlatList,
     StyleSheet
 } from 'react-native';
@@ -33,9 +34,28 @@ export default class App extends Component {
 
     state = {
         photos:[],
+        image:null,
+        isHave:false,
     };
 
-    _handleButtonPress = () => {
+    pickImage = () =>  {
+
+        ImagePickerIOS.canRecordVideos(() => alert('能获取视频'));
+
+        ImagePickerIOS.canUseCamera(() => alert('能获取图片'));
+
+        // openSelectDialog(config, successCallback, errorCallback);
+
+        ImagePickerIOS.openSelectDialog({}, (imageUri) => {
+
+            this.setState({
+                image: imageUri,
+            });
+        }, (error) => {
+            // console.error(error)
+        });
+    }
+    handleButtonPress = () => {
         CameraRoll.getPhotos({
             first: 20,
             assetType: 'Photos',
@@ -49,10 +69,18 @@ export default class App extends Component {
                 //Error Loading Images
             });
     };
+    hasImage = () => {
+        <ImageStore/>
+        ImageStore.hasImageForTag(this.state.image, (hasImage) => {
+            this.setState({
+                isHave: hasImage,
+            });
+        });
+    };
     render() {
         return (
             <View style={{marginTop:44}}>
-                <Button title="Load Images" onPress={this._handleButtonPress} />
+                <Button title="Load Images" onPress={this.handleButtonPress} />
                 <FlatList
                     data={this.state.photos}
                     renderItem={(item) => this.itemView(item)}
@@ -60,6 +88,15 @@ export default class App extends Component {
                     numColumns = {3}
                     horizontal={false}
                 />
+                <View style={{marginTop:30, height: 300, width:200}}>
+                    <Button title="Chose Image" onPress={this.pickImage}/>
+                    <Text>ImagePickerIOS {this.state.isHave ? "Have":"None"}</Text>
+                    {this.state.image?
+                        <Image style={{flex: 1, backgroundColor:'#123123'}} source={{ uri: this.state.image }} /> :
+                        null
+                    }
+                    <Button title="has thisImage" onPress={this.hasImage}/>
+                </View>
             </View>
         );
     }
@@ -83,8 +120,8 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
     iconStyle:{
-        width:80,
-        height:80
+        width:90,
+        height:90
     },
 
     innerViewStyle:{
